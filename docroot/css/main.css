@@ -1,0 +1,58 @@
+.overlay {
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);
+    border-radius: 6px 6px 6px 6px;
+    bottom: 7px;
+    box-shadow: 0 0 1px window inset;
+    color: white;
+    
+    
+    left: 10px;
+    
+    padding: 5px 53px;
+    position: absolute;
+    text-shadow: 0 0 1px white;
+    
+    
+}
+
+.overlay:HOVER {
+	display: block;
+}
+
+.title {
+    font-size: 20px;
+}
+
+.description {
+	font-size: 12px;
+}
+
+.slideshow {
+	text-align: center;
+}
+
+
+
+.aui-column-content.menu-content > ul {
+    list-style: none outside none;
+}
+
+.aui-column-content.menu-content li {
+    font-size: 14px;
+    font-variant: small-caps;
+    font-weight: bold;
+}
+
+.aui-image-gallery-player {
+    display: none;
+
+}
+
+.aui-image-viewer-content .aui-widget-ft {
+	/* display: none; */
+}
+
+.aui-paginator-container {
+    display: none;
+    font-size: 14px;
+}
