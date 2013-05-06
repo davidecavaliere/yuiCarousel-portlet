@@ -21,9 +21,12 @@
 
 
 <%
+String wString = portletPreferences.getValue("width", "950");
+String hString = portletPreferences.getValue("height", "600");
+String bgColor = portletPreferences.getValue("bg-color", "FFF");
 
-int width = 950;
-int height = 600;
+int width = Integer.valueOf(wString);
+int height = Integer.valueOf(hString);
 
 %>
 <style>
@@ -34,7 +37,7 @@ int height = 600;
 }
 
 .aui-carousel-item {
-	background-color: rgba(0,0,0,1);
+	background-color: #<%= bgColor %>;
 	width: <%= width %>px;
 	height: <%= height %>px;
 	text-align: center;

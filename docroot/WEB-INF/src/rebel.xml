@@ -2,13 +2,13 @@
 <application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.zeroturnaround.com" xsi:schemaLocation="http://www.zeroturnaround.com http://www.zeroturnaround.com/alderaan/rebel-2_0.xsd">
 
 	<classpath>
-		<dir name="/home/davide/Liferay_Projects/guygreenfield/liferay-pluing-sdk-6.0.5/portlets/YuiCarousel-portlet/docroot/WEB-INF/classes">
+		<dir name="/home/davide/Liferay_Projects/guygreenfield/liferay-pluing-sdk-6.0.5/portlets/YuiCarousel-portlet/YuiCarousel-portlet/docroot/WEB-INF/classes">
 		</dir>
 	</classpath>
 
 	<web>
 		<link target="/">
-			<dir name="/home/davide/Liferay_Projects/guygreenfield/liferay-pluing-sdk-6.0.5/portlets/YuiCarousel-portlet/docroot">
+			<dir name="/home/davide/Liferay_Projects/guygreenfield/liferay-pluing-sdk-6.0.5/portlets/YuiCarousel-portlet/YuiCarousel-portlet/docroot">
 			</dir>
 		</link>
 	</web>
