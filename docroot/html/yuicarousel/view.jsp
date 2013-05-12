@@ -1,3 +1,7 @@
+<%@page import="com.liferay.portlet.imagegallery.service.IGImageServiceUtil"%>
+<%@page import="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence"%>
+<%@page import="com.liferay.portal.security.permission.ActionKeys"%>
+<%@page import="com.liferay.portal.model.User"%>
 <%@page import="com.liferay.portal.kernel.util.MathUtil"%>
 <%@page import="com.liferay.portal.service.ImageLocalServiceUtil"%>
 <%@page import="com.liferay.portal.kernel.servlet.ImageServletTokenUtil"%>
@@ -55,7 +59,7 @@ PortletURL baseURL = PortletURLUtil.getCurrent(renderRequest, renderResponse);
 
 long groupId = themeDisplay.getScopeGroupId();
 
-
+User currentUser = themeDisplay.getUser();
 
 List<IGFolder> folders = IGFolderLocalServiceUtil.getFolders(groupId);
 IGFolder defaultFolder = null;
@@ -78,9 +82,14 @@ if (folders.size()>0) {
 	<aui:column columnWidth="20" cssClass="menu">
 		
 		<c:if test="<%= folders.size()>0 %>">
-			<h2>Selected Folder: <%= selectedFolder.getName() %></h2>
 			<ul>
-				<% for (IGFolder folder : folders) { %>
+				<% for (IGFolder folder : folders) { 
+					boolean showFolder = permissionChecker.hasPermission(
+							folder.getGroupId(), IGFolder.class.getName(),
+							folder.getFolderId(), ActionKeys.VIEW);
+					
+				%>
+				<c:if test="<%= showFolder %>">
 				<li>
 					<%
 						PortletURL url = PortletURLUtil.clone(baseURL, renderResponse);
@@ -88,23 +97,24 @@ if (folders.size()>0) {
 					%>
 					<aui:a href="<%=url.toString() %>"><%= folder.getName() %></aui:a>
 				</li>
+				</c:if>
 				<% } %>
 			</ul>
 		</c:if>
 	</aui:column>
 	<aui:column columnWidth="80" cssClass="slideshow">
-		<%
+	<%
 	
 	List<IGImage> images = IGImageLocalServiceUtil.getImages(groupId, selectedFolder.getFolderId());
 	
 	%>
-	
-	<h2><%= selectedFolder.getName() %></h2>
-		
 		
 		<div id="carousel">
 		<c:if test="<%= images.size()>0 %>">
 		<% for (IGImage image : images) {
+				boolean showImage = permissionChecker
+						.hasPermission(image.getGroupId(), IGImage.class.getName()
+								, image.getImageId(), ActionKeys.VIEW);
 				Image img = ImageLocalServiceUtil.getImage(image.getLargeImageId());
 				/* if (img.getWidth() > width)
 					width = img.getWidth();
@@ -113,6 +123,7 @@ if (folders.size()>0) {
 				String imgURL = themeDisplay.getPathImage() + 
 						"/image_gallery?img_id=" + image.getLargeImageId();
 		%>
+		<c:if test="<%= showImage %>">
 			<div class="aui-carousel-item">
 				
 				<%
@@ -164,7 +175,7 @@ if (folders.size()>0) {
 				</div>
 			</div>
 			
-			
+			</c:if>
 		<% } %>
 		</c:if>
 		</div>
